@@ -32,6 +32,12 @@
             padding-bottom: 15px;
             letter-spacing: -2px;
         }
+        h1::after {
+    content: " ♀";
+    color: #ff4fc8;
+    font-size: 24px;
+    vertical-align: top;
+}
 
         p {
             color: #eeeeee;
@@ -63,10 +69,11 @@
             box-shadow: 5px 5px 0 #bdbdbd;
         }
 
-        input[type="button"]:hover {
-            background-color: #c0c0c0;
-            border-color: #c0c0c0;
-        }
+      input[type="button"]:hover {
+    background-color: #ff4fc8;
+    border-color: #ff4fc8;
+    color: #000000;
+}
 
         input[type="button"]:active {
             transform: translate(3px, 3px);
@@ -144,17 +151,27 @@
         sest ilmselgelt saab feminismi mõõta protsentides.
     </p>
 
-    <p>
-        mitu tundi päevas veedad substackis?
-        <br>
-        <input type="number" id="tunnid">
-    </p>
+ <p>
+    <span class="prompt">></span> mitu tundi päevas veedad substackis?
+    <br>
+    <input type="number" id="tunnid">
+</p>
+
+<p>
+    <span class="prompt">></span> mitu raamatut sa sellel aastal lugenud oled?
+    <br>
+    <input type="number" id="platvormid">
+</p>
 
     <p>
         mitu raamatut sa sellel aastal lugenud oled?
         <br>
         <input type="number" id="platvormid">
     </p>
+    .prompt {
+    color: #ff4fc8;
+    font-weight: bold;
+}
 
     <input type="button" value="ANALÜÜSI MIND" onclick="arvuta()">
 
