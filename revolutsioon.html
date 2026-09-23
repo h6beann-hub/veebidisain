@@ -4,35 +4,191 @@
 <head>
     <meta charset="UTF-8">
     <title>Feministlik küberrevolutsioon</title>
+
+    <style>
+
+        body {
+            background-color: #0a0a0a;
+            color: #eeeeee;
+            font-family: "Courier New", monospace;
+            margin: 50px;
+            max-width: 1000px;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "✦ CYBERFEMINIST NETWORK // TALLINN // 2026 ✦";
+            display: block;
+            color: #bdbdbd;
+            font-size: 13px;
+            letter-spacing: 2px;
+            margin-bottom: 35px;
+        }
+
+        h1 {
+            color: #0066ff;
+            font-size: 65px;
+            line-height: 0.95;
+            text-transform: uppercase;
+            letter-spacing: -4px;
+            margin-bottom: 30px;
+        }
+
+        h1::after {
+            content: " ♀";
+            color: #ff4fc8;
+            font-size: 30px;
+            vertical-align: top;
+        }
+
+        .manifest {
+            color: #ff4fc8;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-top: 2px solid #ff4fc8;
+            border-bottom: 2px solid #ff4fc8;
+            padding: 15px 0;
+            margin-bottom: 35px;
+        }
+
+        p {
+            color: #eeeeee;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        h2 {
+            color: #bdbdbd;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            border-bottom: 1px solid #bdbdbd;
+            padding-bottom: 10px;
+            margin-top: 55px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            border-bottom: 1px solid #0066ff;
+            padding: 18px 10px;
+            font-size: 18px;
+        }
+
+        li:hover {
+            background-color: #0066ff;
+            color: #0a0a0a;
+            padding-left: 25px;
+        }
+
+        .aeg {
+            color: #ff4fc8;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        li:hover .aeg {
+            color: #0a0a0a;
+        }
+
+        .info {
+            border: 2px solid #0066ff;
+            padding: 25px;
+            margin-top: 20px;
+            width: 60%;
+        }
+
+        .info p {
+            margin: 5px 0;
+        }
+
+        .kuupaev {
+            color: #0066ff;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .status {
+            margin-top: 45px;
+            color: #ff4fc8;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        a {
+            color: #0066ff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #ff4fc8;
+        }
+
+        .tagasi {
+            margin-top: 50px;
+            border-top: 1px solid #0066ff;
+            padding-top: 20px;
+        }
+
+    </style>
+
 </head>
 
 <body>
 
-    <h1>feministlik küberrevolutsioon</h1>
+    <h1>Feministlik küberrevolutsioon</h1>
 
-    <h2>digitaalne ruum ei ole neutraalne.</h2>
+    <div class="manifest">
+        digitaalne ruum ei ole neutraalne.
+    </div>
 
     <p>
         feministlik küberrevolutsioon on ühepäevane sündmus,
         mis uurib tehnoloogia, soo, keha ja võimu vahelisi suhteid.
     </p>
 
-    <h2>programm</h2>
+    <h2>Programm</h2>
 
     <ul>
-        <li>12:00 – kellele internet kuulub?</li>
-        <li>14:00 – algoritmiline pilk: feminism ja tehisaru</li>
-        <li>16:00 – tehislik keha </li>
-        <li>19:00 – cyberfeminist futures</li>
+        <li>
+            <span class="aeg">12:00</span>
+            kellele internet kuulub?
+        </li>
+
+        <li>
+            <span class="aeg">14:00</span>
+            algoritmiline pilk: feminism ja tehisaru
+        </li>
+
+        <li>
+            <span class="aeg">16:00</span>
+            tehislik keha
+        </li>
+
+        <li>
+            <span class="aeg">19:00</span>
+            cyberfeminist futures
+        </li>
     </ul>
 
     <h2>Info</h2>
 
-    <p>17. oktoober 2026</p>
-    <p>Tallinn</p>
+    <div class="info">
+        <p class="kuupaev">17.10.2026</p>
+        <p>TALLINN</p>
+        <p>SISSEPÄÄS: TASUTA</p>
+    </div>
 
-    <p>
-        <a href="index.html">← Tagasi sisukorda</a>
+    <p class="status">
+        ● SYSTEM STATUS: REVOLUTION LOADING...
+    </p>
+
+    <p class="tagasi">
+        <a href="index.html">← tagasi sisukorda</a>
     </p>
 
 </body>
