@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>küberfeminismi kalkulaator</title>
+    <title>Küberfeminismi kalkulaator</title>
 
     <style>
 
@@ -13,7 +13,6 @@
             font-family: "Courier New", monospace;
             margin: 50px;
             max-width: 800px;
-            min-height: 100vh;
         }
 
         body::before {
@@ -32,17 +31,23 @@
             padding-bottom: 15px;
             letter-spacing: -2px;
         }
+
         h1::after {
-    content: " ♀";
-    color: #ff4fc8;
-    font-size: 24px;
-    vertical-align: top;
-}
+            content: " ♀";
+            color: #ff4fc8;
+            font-size: 24px;
+            vertical-align: top;
+        }
 
         p {
             color: #eeeeee;
             font-size: 18px;
             line-height: 1.6;
+        }
+
+        .prompt {
+            color: #ff4fc8;
+            font-weight: bold;
         }
 
         input[type="number"] {
@@ -69,11 +74,11 @@
             box-shadow: 5px 5px 0 #bdbdbd;
         }
 
-      input[type="button"]:hover {
-    background-color: #ff4fc8;
-    border-color: #ff4fc8;
-    color: #000000;
-}
+        input[type="button"]:hover {
+            background-color: #ff4fc8;
+            border-color: #ff4fc8;
+            color: #000000;
+        }
 
         input[type="button"]:active {
             transform: translate(3px, 3px);
@@ -81,17 +86,21 @@
         }
 
         #vastus {
-            color: #0066ff;
+            color: #ff4fc8;
             margin-top: 30px;
         }
 
         #vastus:not(:empty) {
             padding: 20px;
-            border: 2px solid #0066ff;
+            border: 2px solid #ff4fc8;
         }
 
         a {
             color: #0066ff;
+        }
+
+        a:hover {
+            color: #ff4fc8;
         }
 
         hr {
@@ -99,8 +108,6 @@
             border-top: 1px solid #0066ff;
             margin-top: 40px;
         }
-
-    
 
     </style>
 
@@ -145,33 +152,25 @@
 
 <body>
 
-    <h1>küberfeminismi kalkulaator_</h1>
+    <h1>Küberfeminismi kalkulaator_</h1>
 
     <p>
         sest ilmselgelt saab feminismi mõõta protsentides.
     </p>
 
- <p>
-    <span class="prompt">></span> mitu tundi päevas veedad substackis?
-    <br>
-    <input type="number" id="tunnid">
-</p>
-
-<p>
-    <span class="prompt">></span> mitu raamatut sa sellel aastal lugenud oled?
-    <br>
-    <input type="number" id="platvormid">
-</p>
+    <p>
+        <span class="prompt">></span>
+        mitu tundi päevas veedad substackis?
+        <br>
+        <input type="number" id="tunnid">
+    </p>
 
     <p>
+        <span class="prompt">></span>
         mitu raamatut sa sellel aastal lugenud oled?
         <br>
         <input type="number" id="platvormid">
     </p>
-    .prompt {
-    color: #ff4fc8;
-    font-weight: bold;
-}
 
     <input type="button" value="ANALÜÜSI MIND" onclick="arvuta()">
 
