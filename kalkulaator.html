@@ -17,9 +17,26 @@
                 tulemus = 100;
             }
 
+            let teade = "";
+
+            if (tulemus <= 30) {
+                teade = "SYSTEM OFFLINE. REVOLUTION NOT FOUND.";
+            }
+            else if (tulemus <= 50) {
+                teade = "CONSCIOUSNESS.EXE IS BOOTING...";
+            }
+            else if (tulemus <= 70) {
+                teade = "ALGORITHM RESISTANCE DETECTED.";
+            }
+            else if (tulemus <= 89) {
+                teade = "PATRIARCHY.EXE HAS STOPPED WORKING.";
+            }
+            else {
+                teade = "CYBERFEMINIST REVOLUTION ACTIVATED.";
+            }
+
             document.getElementById("vastus").innerHTML =
-                "Sinu küberfeminismi tase on " + tulemus + "%<br><br>" +
-                "PATRIARCHY.EXE HAS STOPPED WORKING";
+                "Sinu küberfeminismi tase on " + tulemus + "%<br><br>" + teade;
         }
     </script>
 
@@ -27,20 +44,20 @@
 
 <body>
 
-    <h1>küberfeminismi kalkulaator_</h1>
+    <h1>Küberfeminismi kalkulaator_</h1>
 
     <p>
-        sest ilmselgelt saab feminismi mõõta protsentides.
+        Sest ilmselgelt saab feminismi mõõta protsentides.
     </p>
 
     <p>
-        mitu tundi päevas veedad internetis?
+        Mitu tundi päevas veedad internetis?
         <br>
         <input type="number" id="tunnid">
     </p>
 
     <p>
-        mitut sotsiaalmeediaplatvormi kasutad?
+        Mitut sotsiaalmeediaplatvormi kasutad?
         <br>
         <input type="number" id="platvormid">
     </p>
@@ -51,27 +68,10 @@
 
     <hr>
 
-    <a href="index.html">← tagasi sisukorda</a>
+    <p>
+        <a href="index.html">← tagasi sisukorda</a>
+    </p>
 
 </body>
 
 </html>
-
-if (tulemus <= 30) {
-    teade = "SYSTEM OFFLINE. REVOLUTION NOT FOUND.";
-}
-else if (tulemus <= 50) {
-    teade = "CONSCIOUSNESS.EXE IS BOOTING...";
-}
-else if (tulemus <= 70) {
-    teade = "ALGORITHM RESISTANCE DETECTED.";
-}
-else if (tulemus <= 89) {
-    teade = "PATRIARCHY.EXE HAS STOPPED WORKING.";
-}
-else {
-    teade = "CYBERFEMINIST REVOLUTION ACTIVATED.";
-}
-
-document.getElementById("vastus").innerHTML =
-    "Sinu küberfeminismi tase on " + tulemus + "%<br><br>" + teade;
