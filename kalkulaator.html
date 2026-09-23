@@ -13,6 +13,7 @@
             font-family: "Courier New", monospace;
             margin: 50px;
             max-width: 800px;
+            min-height: 100vh;
         }
 
         body::before {
@@ -91,6 +92,54 @@
             border-top: 1px solid #0066ff;
             margin-top: 40px;
         }
+
+        /* leopardimustriga dekoratiivne riba */
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 28%;
+    height: 100vh;
+
+    background-color: #c0c0c0;
+
+    background-image:
+        radial-gradient(ellipse at 20% 20%,
+            #0a0a0a 0%,
+            #0a0a0a 12%,
+            #0066ff 13%,
+            #0066ff 22%,
+            transparent 23%),
+
+        radial-gradient(ellipse at 70% 40%,
+            #0a0a0a 0%,
+            #0a0a0a 10%,
+            #0066ff 11%,
+            #0066ff 20%,
+            transparent 21%),
+
+        radial-gradient(ellipse at 35% 75%,
+            #0a0a0a 0%,
+            #0a0a0a 11%,
+            #0066ff 12%,
+            #0066ff 21%,
+            transparent 22%),
+
+        radial-gradient(ellipse at 85% 85%,
+            #0a0a0a 0%,
+            #0a0a0a 9%,
+            #0066ff 10%,
+            #0066ff 18%,
+            transparent 19%);
+
+    background-size: 130px 130px;
+
+    border-left: 3px solid #0066ff;
+
+    z-index: -1;
+}
 
     </style>
 
