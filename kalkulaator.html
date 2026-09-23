@@ -56,3 +56,22 @@
 </body>
 
 </html>
+
+if (tulemus <= 30) {
+    teade = "SYSTEM OFFLINE. REVOLUTION NOT FOUND.";
+}
+else if (tulemus <= 50) {
+    teade = "CONSCIOUSNESS.EXE IS BOOTING...";
+}
+else if (tulemus <= 70) {
+    teade = "ALGORITHM RESISTANCE DETECTED.";
+}
+else if (tulemus <= 89) {
+    teade = "PATRIARCHY.EXE HAS STOPPED WORKING.";
+}
+else {
+    teade = "CYBERFEMINIST REVOLUTION ACTIVATED.";
+}
+
+document.getElementById("vastus").innerHTML =
+    "Sinu küberfeminismi tase on " + tulemus + "%<br><br>" + teade;
