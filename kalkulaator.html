@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Küberfeminismi kalkulaator</title>
+
+    <script>
+        function arvuta() {
+
+            let tunnid = Number(document.getElementById("tunnid").value);
+            let platvormid = Number(document.getElementById("platvormid").value);
+
+            let tulemus = 30 + (tunnid * 5) + (platvormid * 4);
+
+            if (tulemus > 100) {
+                tulemus = 100;
+            }
+
+            document.getElementById("vastus").innerHTML =
+                "Sinu küberfeminismi tase on " + tulemus + "%<br><br>" +
+                "PATRIARCHY.EXE HAS STOPPED WORKING";
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <h1>küberfeminismi kalkulaator_</h1>
+
+    <p>
+        sest ilmselgelt saab feminismi mõõta protsentides.
+    </p>
+
+    <p>
+        mitu tundi päevas veedad internetis?
+        <br>
+        <input type="number" id="tunnid">
+    </p>
+
+    <p>
+        mitut sotsiaalmeediaplatvormi kasutad?
+        <br>
+        <input type="number" id="platvormid">
+    </p>
+
+    <input type="button" value="ANALÜÜSI MIND" onclick="arvuta()">
+
+    <h2 id="vastus"></h2>
+
+    <hr>
+
+    <a href="index.html">← tagasi sisukorda</a>
+
+</body>
+
+</html>
