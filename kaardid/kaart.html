@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Minu Tallinna hangout spotid</title>
+    <title>Cool Hangout Spots</title>
 
     <link rel="stylesheet"
           href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -14,55 +14,97 @@
         html, body {
             height: 100%;
             margin: 0;
+            font-family: Arial, sans-serif;
         }
 
+        /* Pealkiri */
+        #pealkiri {
+            height: 70px;
+            background-color: #ffd6e7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        /* Kaart */
         #kaardikiht {
-            height: 100%;
+            height: calc(100% - 70px);
             width: 100%;
         }
+
+        /* Beebiroosa marker */
+        .roosa-marker {
+            background-color: #f5a9c4;
+            width: 22px;
+            height: 22px;
+            border-radius: 50% 50% 50% 0;
+            border: 2px solid white;
+            transform: rotate(-45deg);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
     </style>
 </head>
 
 <body>
 
-<div id="kaardikiht"></div>
+    <div id="pealkiri">
+        cool hangout spots
+    </div>
 
-<script>
+    <div id="kaardikiht"></div>
 
-    // Loome Tallinna kaardi
-    var kaart = L.map('kaardikiht').setView([59.445, 24.72], 13);
+    <script>
 
-    // Lisame OpenStreetMapi taustakaardi
-    L.tileLayer(
-        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        {
-            attribution: '&copy; OpenStreetMap contributors'
-        }
-    ).addTo(kaart);
+        // Loome Tallinna kaardi
+        var kaart = L.map('kaardikiht').setView([59.445, 24.72], 13);
 
-
-    // Loeme kohad eraldi kohad.json failist
-    fetch("kohad.json")
-        .then(vastus => vastus.json())
-        .then(kuvaKohad);
+        // OpenStreetMapi taust
+        L.tileLayer(
+            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            {
+                attribution: '&copy; OpenStreetMap contributors'
+            }
+        ).addTo(kaart);
 
 
-    // Teeme iga koha jaoks markeri
-    function kuvaKohad(kohad) {
+        // Loome enda roosa markeri
+        var roosaIkoon = L.divIcon({
+            className: '',
+            html: '<div class="roosa-marker"></div>',
+            iconSize: [26, 26],
+            iconAnchor: [13, 26],
+            popupAnchor: [0, -26]
+        });
 
-        for (let koht of kohad) {
 
-            L.marker([koht.lat, koht.lon])
+        // Loeme kohad.json faili
+        fetch("kohad.json")
+            .then(vastus => vastus.json())
+            .then(kuvaKohad);
+
+
+        // Lisame iga koha kaardile
+        function kuvaKohad(kohad) {
+
+            for (let koht of kohad) {
+
+                L.marker(
+                    [koht.lat, koht.lon],
+                    {icon: roosaIkoon}
+                )
                 .addTo(kaart)
                 .bindPopup(
                     "<b>" + koht.nimi + "</b><br>" +
                     koht.kirjeldus
                 );
 
+            }
         }
-    }
 
-</script>
+    </script>
 
 </body>
 
