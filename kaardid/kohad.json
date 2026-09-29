@@ -1,8 +1,56 @@
 [
   {
     "nimi": "VESTA",
-    "lat": 59.000,
-    "lon": 24.000,
+    "lat": 59.4541153,
+    "lon": 24.7071516,
     "kirjeldus": "resto"
+  },
+  {
+    "nimi": "Karjase Sai",
+    "lat": 59.4562078,
+    "lon": 24.6747680,
+    "kirjeldus": "pagarikoda"
+  },
+  {
+    "nimi": "Brick Cafe",
+    "lat": 59.4401194,
+    "lon": 24.7325525,
+    "kirjeldus": "kohvik"
+  },
+  {
+    "nimi": "Terminal Records & Bar",
+    "lat": 59.4401764,
+    "lon": 24.7334706,
+    "kirjeldus": "plaadipood ja baar"
+  },
+  {
+    "nimi": "Paavli Kultuurivabrik",
+    "lat": 59.4475957,
+    "lon": 24.7049550,
+    "kirjeldus": "peoks"
+  },
+  {
+    "nimi": "Veino",
+    "lat": 59.4410550,
+    "lon": 24.7457476,
+    "kirjeldus": "veinibaar"
+  },
+  {
+    "nimi": "Botaanik",
+    "lat": 59.4411191,
+    "lon": 24.7456162,
+    "kirjeldus": "baar"
+  },
+  {
+    "nimi": "Burger Box",
+    "lat": 59.4413231,
+    "lon": 24.7368262,
+    "kirjeldus": "resto"
+  },
+  {
+    "nimi": "TOPS",
+    "lat": 59.4457487,
+    "lon": 24.7389202,
+    "kirjeldus": "baar"
   }
 ]
