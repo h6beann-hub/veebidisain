@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
-    <title>Minu kaart</title>
+    <title>Minu Tallinna hangout spotid</title>
 
     <link rel="stylesheet"
           href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -27,15 +28,42 @@
 <div id="kaardikiht"></div>
 
 <script>
-    var kaart = L.map('kaardikiht').setView([59.437, 24.753], 12);
 
+    // Loome Tallinna kaardi
+    var kaart = L.map('kaardikiht').setView([59.445, 24.72], 13);
+
+    // Lisame OpenStreetMapi taustakaardi
     L.tileLayer(
         'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         {
             attribution: '&copy; OpenStreetMap contributors'
         }
     ).addTo(kaart);
+
+
+    // Loeme kohad eraldi kohad.json failist
+    fetch("kohad.json")
+        .then(vastus => vastus.json())
+        .then(kuvaKohad);
+
+
+    // Teeme iga koha jaoks markeri
+    function kuvaKohad(kohad) {
+
+        for (let koht of kohad) {
+
+            L.marker([koht.lat, koht.lon])
+                .addTo(kaart)
+                .bindPopup(
+                    "<b>" + koht.nimi + "</b><br>" +
+                    koht.kirjeldus
+                );
+
+        }
+    }
+
 </script>
 
 </body>
+
 </html>
