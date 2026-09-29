@@ -1,1 +1,8 @@
-
+[
+  {
+    "nimi": "VESTA",
+    "lat": 59.000,
+    "lon": 24.000,
+    "kirjeldus": "resto"
+  }
+]
