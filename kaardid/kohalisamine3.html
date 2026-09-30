@@ -58,7 +58,11 @@ html, body {
 
             console.log(lisand);
 
-            fetch("https://script.google.com/macros/s/AKfycbzBBnaZMmf7r8o2IJeGLnMrqKBAIQi4v918dLsPgoqO0s2sJosRC8d8motlHuQo1BVq/exec?" + lisand);
+            fetch("https://script.google.com/macros/s/AKfycbzBBnaZMmf7r8o2IJeGLnMrqKBAIQi4v918dLsPgoqO0s2sJosRC8d8motlHuQo1BVq/exec?" + lisand
+                 ).then(d => d.json()).then(kuva);
+
+            function kuva(andmed){
+              console.log(andmed);
         }
     </script>
 </head>
