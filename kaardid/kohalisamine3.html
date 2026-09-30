@@ -47,23 +47,25 @@ html, body {
             kaart.on("click", vajutus);
         }
 
-        function vajutus(e){
-            hypik.setLatLng(e.latlng);
-            hypik.setContent("Vajutasid " + e.latlng.toString()).openOn(kaart);
+      function vajutus(e){
+    hypik.setLatLng(e.latlng);
+    hypik.setContent("Vajutasid " + e.latlng.toString()).openOn(kaart);
 
-            let lisand = "laiuskraad=" + e.latlng.lat +
-                         "&pikkuskraad=" + e.latlng.lng +
-                         "&tyyp=" + tyybivalik.value +
-                         "&kommentaar=" + encodeURI(kast1.value);
+    let lisand = "laiuskraad=" + e.latlng.lat +
+                 "&pikkuskraad=" + e.latlng.lng +
+                 "&tyyp=" + tyybivalik.value +
+                 "&kommentaar=" + encodeURI(kast1.value);
 
-            console.log(lisand);
+    console.log(lisand);
 
-            fetch("https://script.google.com/macros/s/AKfycbzBBnaZMmf7r8o2IJeGLnMrqKBAIQi4v918dLsPgoqO0s2sJosRC8d8motlHuQo1BVq/exec?" + lisand
-                 ).then(d => d.json()).then(kuva);
+    fetch("https://script.google.com/macros/s/AKfycbzBBnaZMmf7r8o2IJeGLnMrqKBAIQi4v918dLsPgoqO0s2sJosRC8d8motlHuQo1BVq/exec?" + lisand)
+        .then(d => d.json())
+        .then(kuva);
+}  // ← SEE OLI SUL PUUDU
 
-            function kuva(andmed){
-              console.log(andmed);
-        }
+function kuva(andmed){
+    console.log(andmed);
+}
     </script>
 </head>
 
