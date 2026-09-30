@@ -42,3 +42,12 @@
     <div id="kaardikiht"></div>
 </body>
 </html>
+
+function vajutus(e){
+    hypik.setLatLng(e.latlng);
+    hypik.setContent("Vajutasid " + e.latlng.toString()).openOn(kaart);
+
+    let lisand = "laiuskraad=" + e.latlng.lat + "&pikkuskraad=" + e.latlng.lng;
+
+    fetch("https://script.google.com/macros/s/AKfycbxSdKVD31kXaCpE97nIX_uWakCYgBOBzzoBiBIVZtxUSjmCEaPi-R_ZJfrlkRx_Gyk1/exec" + lisand);
+}
