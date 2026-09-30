@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kaart</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" />
+
+    <style>
+body {
+    padding: 0;
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+#valikud {
+    height: 40px;
+    padding: 5px;
+}
+
+#kaardikiht {
+    width: 100%;
+    height: calc(100% - 50px);
+}
+    </style>
+
+    <script>
+        var kaart;
+        var hypik;
+
+        function algus(){
+            kaart = L.map('kaardikiht').setView([59.439, 24.773], 12);
+
+            L.tileLayer(
+                'https://tiles.maaamet.ee/tm/tms/1.0.0/hybriid@GMC/{z}/{x}/{y}.png',
+                {
+                    attribution: 'Map: <a href="https://www.maaamet.ee/">Maa-amet</a>',
+                    tms: true
+                }
+            ).addTo(kaart);
+
+            hypik = L.popup();
+            kaart.on("click", vajutus);
+        }
+
+        function vajutus(e){
+            hypik.setLatLng(e.latlng);
+            hypik.setContent("Vajutasid " + e.latlng.toString()).openOn(kaart);
+
+            let lisand = "laiuskraad=" + e.latlng.lat +
+                         "&pikkuskraad=" + e.latlng.lng +
+                         "&tyyp=" + tyybivalik.value +
+                         "&kommentaar=" + encodeURI(kast1.value);
+
+            console.log(lisand);
+
+            fetch("https://script.google.com/macros/s/AKfycbzBBnaZMmf7r8o2IJeGLnMrqKBAIQi4v918dLsPgoqO0s2sJosRC8d8motlHuQo1BVq/exec?" + lisand);
+        }
+    </script>
+</head>
+
+<body onload="algus()">
+
+    <div>
+     <div id="valikud">
+    <select id="tyybivalik">
+        <option>kool</option>
+        <option>kirik</option>
+        <option>kauplus</option>
+    </select>
+
+    <input type="text" id="kast1" placeholder="Kommentaar" />
+</div>
+    </div>
+
+    <div id="kaardikiht"></div>
+
+</body>
+</html>
