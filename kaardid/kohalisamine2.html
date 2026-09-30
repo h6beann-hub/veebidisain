@@ -36,6 +36,7 @@
             hypik.setContent("Vajutasid " + e.latlng.toString()).openOn(kaart);
 
             let lisand = "laiuskraad=" + e.latlng.lat + "&pikkuskraad=" + e.latlng.lng + "&tyyp=" + tyybivalik.value;
+            console.log(lisand);
 
             fetch("https://script.google.com/macros/s/AKfycbxSdKVD31kXaCpE97nIX_uWakCYgBOBzzoBiBIVZtxUSjmCEaPi-R_ZJfrlkRx_Gyk1/exec?" + lisand);
         }
