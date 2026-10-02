@@ -17,7 +17,7 @@
   let marker1, marker2;
   function algus () {
   kaart = L.map('kaardikiht').setView([59.439,24.773], 12);
-  L.titleLayer( 'https://maaamet.ee/tm/tms/1.0.0/hybriid@GMC/{z}/{x}/{y}.png&ASUTUS=TLU&ERIALA=DIGIHUMANITAARIA' , {
+  L.tileLayer( 'https://maaamet.ee/tm/tms/1.0.0/hybriid@GMC/{z}/{x}/{y}.png&ASUTUS=TLU&ERIALA=DIGIHUMANITAARIA' , {
   attribution: "Map: <a href='https://www.maaamet.ee/'>Maa-amet</a>a>",
   tms: true,
   }).addTo(kaart);
