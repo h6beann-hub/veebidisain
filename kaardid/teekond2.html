@@ -9,7 +9,7 @@
     <link rel="stylesheet"
           href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     
-<script src="http://unpkg.com/leaflet@1.9.4/dist/leaflet.js></script>
+<script src="http://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <script>
   let kaart;
@@ -17,7 +17,7 @@
   let marker1, marker2;
   function algus () {
   kaart = L.map('kaardikiht').setView([59.439,24.773], 12);
-  new L.Titlelayer( 'https://maaamet.ee/tm/tms/1.0.0/hybriid@GMC/{z}/{x}/{y}.png&ASUTUS=TLU&ERIALA=DIGIHUMANITAARIA' , {
+  new L.titlelayer( 'https://maaamet.ee/tm/tms/1.0.0/hybriid@GMC/{z}/{x}/{y}.png&ASUTUS=TLU&ERIALA=DIGIHUMANITAARIA' , {
   attribution: "Map: <a href='http://www.maaamet.ee/'>Maa-amet</a>a>",
   tms: true,
   }).addTo(kaart);
@@ -40,6 +40,8 @@
   console.log(tee["duration"], tee["distance"]);
   console.log(tee["geometry"]);
   L.geoJSON(tee.geometry).addTo(kaart);
+  }
+    </script>
 
 
     <style>
