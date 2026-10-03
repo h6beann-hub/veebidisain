@@ -86,6 +86,42 @@ function kuvaTeatrid(teatrid) {
 
         kaart.on("click", function(e) {
 
+    // Eemaldame eelmise kasutaja markeri
+    if (kasutajaMarker) {
+        kaart.removeLayer(kasutajaMarker);
+    }
+
+    // Alustame popupi teksti
+    let tekst = "<b>Sinu valitud asukoht</b><br><br>";
+
+    // Arvutame kauguse iga teatrini
+    for (let teater of teatridAndmed) {
+
+        let teatriAsukoht = L.latLng(
+            Number(teater.laiuskraad),
+            Number(teater.pikkuskraad)
+        );
+
+        let kaugus = e.latlng.distanceTo(teatriAsukoht);
+
+        // Muudame meetrid kilomeetriteks
+        let kaugusKm = (kaugus / 1000).toFixed(2);
+
+        tekst +=
+            teater.teater +
+            ": " +
+            kaugusKm +
+            " km<br>";
+    }
+
+    // Lisame kasutaja valitud punkti kaardile
+    kasutajaMarker = L.marker(e.latlng)
+        .addTo(kaart)
+        .bindPopup(tekst)
+        .openPopup();
+
+});
+
     // Kui kasutaja on juba ühe koha valinud,
     // eemaldame vana markeri
     if (kasutajaMarker) {
