@@ -44,6 +44,9 @@
 
     <script>
 
+        let teatridAndmed = [];
+        let kasutajaMarker;
+
         let kaart = L.map('kaardikiht').setView([59.437, 24.745], 14);
 
         L.tileLayer(
@@ -64,6 +67,8 @@ fetch(tabeliURL)
 function kuvaTeatrid(teatrid) {
 
     console.log(teatrid);
+
+    teatridAndmed = teatrid;
 
     for (let teater of teatrid) {
 
