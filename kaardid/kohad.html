@@ -53,6 +53,32 @@
             }
         ).addTo(kaart);
 
+        // Google Apps Scripti aadress
+let tabeliURL = "SIIA_SINU_EXEC_AADRESS";
+
+// Küsime teatrid Google Sheetsist
+fetch(tabeliURL)
+    .then(vastus => vastus.json())
+    .then(kuvaTeatrid);
+
+function kuvaTeatrid(teatrid) {
+
+    console.log(teatrid);
+
+    for (let teater of teatrid) {
+
+        L.marker([
+            Number(teater.laiuskraad),
+            Number(teater.pikkuskraad)
+        ])
+        .addTo(kaart)
+        .bindPopup(
+            "<b>" + teater.teater + "</b><br>" +
+            teater.aadress
+        );
+    }
+}
+
     </script>
 
 </body>
