@@ -44,11 +44,18 @@
 
     <script>
 
+        // Siia salvestame Google Sheetsist saadud teatrid
         let teatridAndmed = [];
+
+        // Siia salvestame kasutaja valitud asukoha markeri
         let kasutajaMarker;
 
+
+        // Loome kaardi
         let kaart = L.map('kaardikiht').setView([59.437, 24.745], 14);
 
+
+        // Lisame OpenStreetMapi tausta
         L.tileLayer(
             'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             {
@@ -56,100 +63,86 @@
             }
         ).addTo(kaart);
 
+
         // Google Apps Scripti aadress
-let tabeliURL = "https://script.google.com/macros/s/AKfycbyZVUNwouV3-LXpfEsal4dfVxC9eBJ-RuOjvz1XO5vobRk1c5njstfRPvfP-YheEX-O/exec";
+        let tabeliURL =
+        "https://script.google.com/macros/s/AKfycbyZVUNwouV3-LXpfEsal4dfVxC9eBJ-RuOjvz1XO5vobRk1c5njstfRPvfP-YheEX-O/exec";
 
-// Küsime teatrid Google Sheetsist
-fetch(tabeliURL)
-    .then(vastus => vastus.json())
-    .then(kuvaTeatrid);
 
-function kuvaTeatrid(teatrid) {
+        // Küsime teatrid Google Sheetsist
+        fetch(tabeliURL)
+            .then(vastus => vastus.json())
+            .then(kuvaTeatrid);
 
-    console.log(teatrid);
 
-    teatridAndmed = teatrid;
+        // Näitame Google Sheetsist saadud teatrid kaardil
+        function kuvaTeatrid(teatrid) {
 
-    for (let teater of teatrid) {
+            console.log(teatrid);
 
-        L.marker([
-            Number(teater.laiuskraad),
-            Number(teater.pikkuskraad)
-        ])
-        .addTo(kaart)
-        .bindPopup(
-            "<b>" + teater.teater + "</b><br>" +
-            teater.aadress
-        );
-    }
-}
+            teatridAndmed = teatrid;
 
+            for (let teater of teatrid) {
+
+                L.marker([
+                    Number(teater.laiuskraad),
+                    Number(teater.pikkuskraad)
+                ])
+                .addTo(kaart)
+                .bindPopup(
+                    "<b>" + teater.teater + "</b><br>" +
+                    teater.aadress
+                );
+            }
+        }
+
+
+        // Kui kasutaja vajutab kaardile
         kaart.on("click", function(e) {
 
-    // Eemaldame eelmise kasutaja markeri
-    if (kasutajaMarker) {
-        kaart.removeLayer(kasutajaMarker);
-    }
+            // Eemaldame eelmise kasutaja markeri
+            if (kasutajaMarker) {
+                kaart.removeLayer(kasutajaMarker);
+            }
 
-    // Alustame popupi teksti
-    let tekst = "<b>Sinu valitud asukoht</b><br><br>";
 
-    // Arvutame kauguse iga teatrini
-    for (let teater of teatridAndmed) {
+            // Popupi tekst
+            let tekst =
+                "<b>Sinu valitud asukoht</b><br><br>" +
+                "<b>Kaugused teatritest:</b><br>";
 
-        let teatriAsukoht = L.latLng(
-            Number(teater.laiuskraad),
-            Number(teater.pikkuskraad)
-        );
 
-        let kaugus = e.latlng.distanceTo(teatriAsukoht);
+            // Arvutame kauguse iga teatrini
+            for (let teater of teatridAndmed) {
 
-        // Muudame meetrid kilomeetriteks
-        let kaugusKm = (kaugus / 1000).toFixed(2);
+                let teatriAsukoht = L.latLng(
+                    Number(teater.laiuskraad),
+                    Number(teater.pikkuskraad)
+                );
 
-        tekst +=
-            teater.teater +
-            ": " +
-            kaugusKm +
-            " km<br>";
-    }
+                let kaugus =
+                    e.latlng.distanceTo(teatriAsukoht);
 
-    // Lisame kasutaja valitud punkti kaardile
-    kasutajaMarker = L.marker(e.latlng)
-        .addTo(kaart)
-        .bindPopup(tekst)
-        .openPopup();
+                // meetrid → kilomeetrid
+                let kaugusKm =
+                    (kaugus / 1000).toFixed(2);
 
-});
 
-    // Kui kasutaja on juba ühe koha valinud,
-    // eemaldame vana markeri
-    if (kasutajaMarker) {
-        kaart.removeLayer(kasutajaMarker);
-    }
+                tekst +=
+                    teater.teater +
+                    ": " +
+                    kaugusKm +
+                    " km<br>";
+            }
 
-    // Lisame markeri kasutaja valitud kohta
-    kasutajaMarker = L.marker(e.latlng)
-        .addTo(kaart)
-        .bindPopup("Sinu valitud asukoht")
-        .openPopup();
 
-    // Arvutame kauguse iga teatrini
-    for (let teater of teatridAndmed) {
+            // Lisame kasutaja valitud asukoha kaardile
+            kasutajaMarker = L.marker(e.latlng)
+                .addTo(kaart)
+                .bindPopup(tekst)
+                .openPopup();
 
-        let teatriAsukoht = L.latLng(
-            Number(teater.laiuskraad),
-            Number(teater.pikkuskraad)
-        );
-
-        let kaugus = e.latlng.distanceTo(teatriAsukoht);
-
-        console.log(
-            teater.teater + ": " +
-            Math.round(kaugus) + " m"
-        );
-    }
-});
+        });
 
     </script>
 
