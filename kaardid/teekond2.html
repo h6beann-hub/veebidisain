@@ -119,6 +119,23 @@
             .then(vastus => vastus.json())
             .then(kuvaKohad);
 
+        // Teekonna algus- ja lõpp-punkt
+let marker1 = L.marker([59.4410550, 24.7457476], {
+    draggable: true
+}).addTo(kaart);
+
+let marker2 = L.marker([59.4457487, 24.7389202], {
+    draggable: true
+}).addTo(kaart);
+
+// Siia joonistatakse teekond
+let grupp = L.layerGroup().addTo(kaart);
+
+// Kui markerit liigutatakse, arvutame teekonna uuesti
+marker1.on("dragend", liikumine);
+marker2.on("dragend", liikumine);
+
+    liikumine();
 
         // Lisame iga koha kaardile
         function kuvaKohad(kohad) {
@@ -137,6 +154,38 @@
 
             }
         }
+
+        function liikumine() {
+
+    // Kustutame vana teekonna
+    grupp.clearLayers();
+
+    // Võtame markerite praegused asukohad
+    let koht1 = marker1.getLatLng();
+    let koht2 = marker2.getLatLng();
+
+    // Koostame OSRM-i aadressi
+    let aadre =
+        "https://router.project-osrm.org/route/v1/driving/" +
+        koht1.lng + "," + koht1.lat + ";" +
+        koht2.lng + "," + koht2.lat +
+        "?overview=full&geometries=geojson";
+
+    // Küsime OSRM-ilt teekonna
+    fetch(aadre)
+        .then(vastus => vastus.json())
+        .then(kuvaTee);
+}
+
+
+function kuvaTee(andmed) {
+
+    let tee = andmed.routes[0];
+
+    console.log(tee["duration"], tee["distance"]);
+
+    L.geoJSON(tee.geometry).addTo(grupp);
+}
 
     </script>
 
