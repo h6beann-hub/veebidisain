@@ -16,9 +16,18 @@
               }
               LIMIT 10
            `;
-           let aadress="https://query.wikidata.org/sparql?format=json&query="+encodeURI(lause);    
+            let aadress="https://query.wikidata.org/sparql?format=json&query="+encodeURIComponent(lause); 
           vastus.innerHTML="ootan vastust";
-           fetch(aadress).then(d => d.json()).then(kuva);
+         fetch(aadress)
+  .then(d => {
+    if (!d.ok) throw new Error("HTTP viga: " + d.status);
+    return d.json();
+  })
+  .then(kuva)
+  .catch(viga => {
+    console.error(viga);
+    vastus.innerHTML = "<li>Päring ebaõnnestus: " + viga.message + "</li>";
+  });
         }
 
 
