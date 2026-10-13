@@ -155,7 +155,9 @@
                 const andmed = await paring(lause);
                 nimekiri.innerHTML = "";
 
-                const tulemused = andmed.results.bindings;
+              const tulemused = andmed.results.bindings.filter(rida => {
+    return !/^Q\d+$/.test(rida.isikLabel.value);
+});
 
                 if (tulemused.length === 0) {
                     nimekiri.innerHTML =
