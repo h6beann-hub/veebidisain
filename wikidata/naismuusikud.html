@@ -1,0 +1,238 @@
+
+<!doctype html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Naispoplauljad Wikidatas</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff4f8;
+            color: #3e2835;
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #a33e72;
+        }
+
+        .kast {
+            background-color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        select, button {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 7px;
+            border: 1px solid #d7a5bd;
+        }
+
+        button {
+            background-color: #f5bfd8;
+            cursor: pointer;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: #a33e72;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Naispoplauljad Wikidatas</h1>
+
+    <p>
+        See veebileht uurib naispoplauljate esindatust
+        Wikidatas, keskendudes Eestile, Soomele ja Rootsile.
+    </p>
+
+    <div class="kast">
+        <h2>Otsi naispoplauljaid</h2>
+
+        <label for="riik">Riik:</label>
+        <select id="riik">
+            <option value="Q191">Eesti</option>
+            <option value="Q33">Soome</option>
+            <option value="Q34">Rootsi</option>
+        </select>
+
+        <label for="kogus">Tulemuste arv:</label>
+        <select id="kogus">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+        </select>
+
+        <button onclick="otsi()">Otsi</button>
+
+        <h3>Tulemused</h3>
+        <ul id="vastus"></ul>
+    </div>
+
+    <div class="kast">
+        <h2>Riikide võrdlus</h2>
+        <button onclick="vordle()">Võrdle riike</button>
+        <ul id="vordlus"></ul>
+    </div>
+
+    <div class="kast">
+        <h2>Tulemuste analüüs</h2>
+
+        <p>
+            Wikidata päringu põhjal oli Rootsi
+            naispoplauljate kohta 211 kirjet,
+            Soome kohta 49 ja Eesti kohta 33.
+        </p>
+
+        <p>
+            Need erinevused ei pruugi kajastada
+            naispoplauljate tegelikku arvukust,
+            vaid võivad tuleneda ka Wikidata
+            andmete erinevast põhjalikkusest.
+        </p>
+
+        <p>
+            Uurimuse piiranguks on asjaolu, et
+            kõigi artistide žanr ja amet ei pruugi
+            olla Wikidatas märgitud. Seetõttu
+            ei ole tulemused ammendavad.
+        </p>
+    </div>
+
+    <script>
+        const api = "https://query.wikidata.org/sparql";
+
+        async function paring(lause) {
+            const aadress =
+                api + "?format=json&query=" +
+                encodeURIComponent(lause);
+
+            const vastus = await fetch(aadress);
+
+            if (!vastus.ok) {
+                throw new Error("Wikidata viga: " + vastus.status);
+            }
+
+            return await vastus.json();
+        }
+
+        async function otsi() {
+            const riik = document.getElementById("riik").value;
+            const kogus = document.getElementById("kogus").value;
+            const nimekiri = document.getElementById("vastus");
+
+            nimekiri.innerHTML = "<li>Ootan vastust...</li>";
+
+            const lause = `
+                SELECT DISTINCT ?isik ?isikLabel
+                WHERE {
+                    ?isik wdt:P27 wd:${riik}.
+                    ?isik wdt:P21 wd:Q6581072.
+                    ?isik wdt:P106 wd:Q177220.
+                    ?isik wdt:P136 wd:Q37073.
+
+                    SERVICE wikibase:label {
+                        bd:serviceParam wikibase:language "et,en".
+                    }
+                }
+                ORDER BY ?isikLabel
+                LIMIT ${kogus}
+            `;
+
+            try {
+                const andmed = await paring(lause);
+                nimekiri.innerHTML = "";
+
+                const tulemused = andmed.results.bindings;
+
+                if (tulemused.length === 0) {
+                    nimekiri.innerHTML =
+                        "<li>Tulemusi ei leitud.</li>";
+                    return;
+                }
+
+                for (const rida of tulemused) {
+                    const li = document.createElement("li");
+                    const link = document.createElement("a");
+
+                    link.href = rida.isik.value;
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                    link.textContent = rida.isikLabel.value;
+
+                    li.appendChild(link);
+                    nimekiri.appendChild(li);
+                }
+
+            } catch (viga) {
+                nimekiri.textContent =
+                    "Päring ebaõnnestus: " + viga.message;
+            }
+        }
+
+        async function vordle() {
+            const nimekiri = document.getElementById("vordlus");
+
+            nimekiri.innerHTML = "<li>Ootan vastust...</li>";
+
+            const lause = `
+                SELECT ?riik ?riikLabel ?kogus
+                WHERE {
+                    {
+                        SELECT ?riik
+                               (COUNT(DISTINCT ?isik) AS ?kogus)
+                        WHERE {
+                            VALUES ?riik {
+                                wd:Q191 wd:Q33 wd:Q34
+                            }
+
+                            ?isik wdt:P27 ?riik.
+                            ?isik wdt:P21 wd:Q6581072.
+                            ?isik wdt:P106 wd:Q177220.
+                            ?isik wdt:P136 wd:Q37073.
+                        }
+                        GROUP BY ?riik
+                    }
+
+                    SERVICE wikibase:label {
+                        bd:serviceParam wikibase:language "et,en".
+                    }
+                }
+                ORDER BY DESC(?kogus)
+            `;
+
+            try {
+                const andmed = await paring(lause);
+                nimekiri.innerHTML = "";
+
+                for (const rida of andmed.results.bindings) {
+                    const li = document.createElement("li");
+
+                    li.textContent =
+                        rida.riikLabel.value + ": " +
+                        rida.kogus.value + " naispoplauljat";
+
+                    nimekiri.appendChild(li);
+                }
+
+            } catch (viga) {
+                nimekiri.textContent =
+                    "Päring ebaõnnestus: " + viga.message;
+            }
+        }
+    </script>
+
+</body>
+</html>
