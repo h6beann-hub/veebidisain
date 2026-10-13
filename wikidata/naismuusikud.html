@@ -205,10 +205,10 @@
                         }
                         GROUP BY ?riik
                     }
-
-                    SERVICE wikibase:label {
-                        bd:serviceParam wikibase:language "et,en".
-                    }
+                        SERVICE wikibase:label {
+                         bd:serviceParam wikibase:language "et,en,sv,fi".
+                       }
+            
                 }
                 ORDER BY DESC(?kogus)
             `;
