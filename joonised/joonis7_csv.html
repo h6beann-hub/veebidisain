@@ -58,19 +58,37 @@
 	      lumememm(x, y, d[1], d[2], d[3], d[0]);
 	    }
 	  }
-	  function uuendaAndmed(){
-		  fetch("ilmaandmed.csv").then(d => d.text()).then(loe);
-	  }
-	  function loe(tekst){
-		  console.log(tekst);
-		  ilmaandmed=[]
-		  for(rida of tekst.split("\n")){
-			  let m=rida.split(",")
-			  m[1]=parseInt(m[1]);
-			  m[2]=parseInt(m[2]);
-			  m[3]=parseInt(m[3]);
-			  ilmaandmed.push(m);
-		  }
+	 
+function uuendaAndmed(){
+    fetch("ilmaandmed.csv", { cache: "no-store" })
+        .then(d => {
+            if (!d.ok) throw new Error("CSV laadimine ebaõnnestus");
+            return d.text();
+        })
+        .then(loe)
+        .catch(error => console.error(error));
+}
+
+	 
+function loe(tekst){
+    ilmaandmed = [];
+
+    for (let rida of tekst.trim().split("\n")){
+        let m = rida.trim().split(",");
+        if (m.length !== 4) continue;
+
+        m[1] = parseInt(m[1]);
+        m[2] = parseInt(m[2]);
+        m[3] = parseInt(m[3]);
+
+        if (m.slice(1).some(Number.isNaN)) continue;
+
+        ilmaandmed.push(m);
+    }
+
+    joonista();
+}
+
 		  joonista();
 	  }
 	</script>
